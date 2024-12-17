@@ -20,7 +20,8 @@ namespace UtilesDiagram
             Dictionary<char, char> caracteresReemplazo = new Dictionary<char, char>
             {
                 {'á', 'a'}, {'é', 'e'}, {'í', 'i'}, {'ó', 'o'}, {'ú', 'u'},
-                {'Á', 'A'}, {'É', 'E'}, {'Í', 'I'}, {'Ó', 'O'}, {'Ú', 'U'}
+                {'Á', 'A'}, {'É', 'E'}, {'Í', 'I'}, {'Ó', 'O'}, {'Ú', 'U'},
+                {'¥', 'Ñ'}, {'¤', 'ñ'}
                 //{'\u00AA', '.'}, {'ª', '.'}, {'\u00BA', '.'}, {'°', '.' }
             };
 
@@ -135,6 +136,38 @@ namespace UtilesDiagram
                 }
             }
             return versionInstalada >= versionNecesaria;
+        }
+
+        /// <summary>
+        /// Permite borrar todos los ficheros sin tener en cuenta la extension del fichero pasado, como si fuera 'delete fichero.*'; puede ser util para procesos que pueden generar ficheros de varios tipos (html, pdf, txt, etc).
+        /// </summary>
+        /// <param name="fichero"></param>
+        /// <returns>Devuelve la lista de ficheros eliminados</returns>
+        public StringBuilder BorrarFicheros(string fichero)
+        {
+            StringBuilder ficheros = new StringBuilder();
+            string rutaSalida = string.Empty;
+            if(!string.IsNullOrEmpty(fichero))
+            {
+                rutaSalida = Path.GetDirectoryName(fichero);
+            }
+
+            //Si no se ha pasado la ruta completa del fichero, se carga la de ejecucion del programa
+            if(string.IsNullOrEmpty(rutaSalida))
+            {
+                rutaSalida = Directory.GetCurrentDirectory();
+            }
+
+            //Carga todos los ficheros sin importar la extension
+            string patronFicheros = Path.GetFileNameWithoutExtension(fichero) + ".*";
+            string[] elementos = Directory.GetFiles(rutaSalida, patronFicheros);
+
+            foreach(string elemento in elementos)
+            {
+                File.Delete(elemento);
+                ficheros.AppendLine(elemento);
+            }
+            return ficheros;
         }
     }
 }
