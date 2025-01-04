@@ -6,6 +6,7 @@
 ### Control de versiones
  - Version 1.0.0.0 - Primera version funcional.
  - Version 1.1.0.0 - Añadido metodo 'BorrarFicheros'
+ - Version 1.2.0.0 - Modificada clase a estatica
 
 <br>
 

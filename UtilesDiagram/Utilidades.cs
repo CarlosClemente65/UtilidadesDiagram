@@ -3,19 +3,19 @@ using System.IO;
 using System.Text;
 using Microsoft.Win32;
 
-namespace UtilesDiagram
+namespace UtilidadesDiagram
 {
     /// <summary>
     /// Utilidades que se utilizan para las aplicaciones Diagram
     /// </summary>
-    public class UtilidadesDiagram
+    public static class Utilidades
     {
         /// <summary>
         /// Metodo para quitar los acentos a las vocales y simbolos raros
         /// </summary>
         /// <param name="cadena"></param>
         /// <returns>Devuelve una cadena en la que se han sustituido los caracteres raros</returns>
-        public string QuitaRaros(string cadena)
+        public static string QuitaRaros(string cadena)
         {
             Dictionary<char, char> caracteresReemplazo = new Dictionary<char, char>
             {
@@ -47,7 +47,7 @@ namespace UtilesDiagram
         /// <param name="fichero"></param>
         /// <returns>Devuelve 'true' si se ha borrado el fichero</returns>
         //Controla si existe el fichero para borrarlo
-        public bool ControlFicheros(string fichero)
+        public static bool ControlFicheros(string fichero)
         {
             bool resultado = false;
             if(File.Exists(fichero))
@@ -65,7 +65,7 @@ namespace UtilesDiagram
         /// <param name="texto"></param>
         /// <returns>Devuelve 'true' si se ha grabado el fichero</returns>
         //Metodo para grabar el fichero en la ruta que se pase
-        public bool GrabarFichero(string fichero, string texto)
+        public static bool GrabarFichero(string fichero, string texto)
         {
             bool resultado = false;
             try
@@ -86,7 +86,7 @@ namespace UtilesDiagram
         /// <param name="cadena"></param>
         /// <param name="divisor"></param>
         /// <returns>Devuelve dos cadenas con el 'atributo' y 'valor'</returns>
-        public (string, string) DivideCadena(string cadena, char divisor)
+        public static (string, string) DivideCadena(string cadena, char divisor)
         {
             string atributo = string.Empty;
             string valor = string.Empty;
@@ -106,7 +106,7 @@ namespace UtilesDiagram
         /// </summary>
         /// <param name="clave"></param>
         /// <returns>Devuelve 'true' si la version instalada es superior a la necesaria</returns>
-        public bool ChequeoFramework(string clave)
+        public static bool ChequeoFramework(string clave)
         {
             //Diccionario con los valores de las distintas versiones
             Dictionary<string, int> Versiones = new Dictionary<string, int>()
@@ -143,7 +143,7 @@ namespace UtilesDiagram
         /// </summary>
         /// <param name="fichero"></param>
         /// <returns>Devuelve la lista de ficheros eliminados</returns>
-        public StringBuilder BorrarFicheros(string fichero)
+        public static StringBuilder BorrarFicheros(string fichero)
         {
             StringBuilder ficheros = new StringBuilder();
             string rutaSalida = string.Empty;
