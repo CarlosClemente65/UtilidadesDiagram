@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text;
 using Microsoft.Win32;
+using Excel = Microsoft.Office.Interop.Excel;
+
 
 namespace UtilidadesDiagram
 {
@@ -141,7 +143,7 @@ namespace UtilidadesDiagram
         /// <summary>
         /// Permite borrar todos los ficheros sin tener en cuenta la extension del fichero pasado, como si fuera 'delete fichero.*'; puede ser util para procesos que pueden generar ficheros de varios tipos (html, pdf, txt, etc).
         /// </summary>
-        /// <param name="fichero"></param>
+        /// <param name="fichero">Nombre del fichero a borrar</param>
         /// <returns>Devuelve la lista de ficheros eliminados</returns>
         public static StringBuilder BorrarFicheros(string fichero)
         {
@@ -168,6 +170,36 @@ namespace UtilidadesDiagram
                 ficheros.AppendLine(elemento);
             }
             return ficheros;
+        }
+
+        /// <summary>
+        /// Permite convertir un fichero.xls (Excel 97-2003) a fichero.xlsx (Excel 2007)
+        /// </summary>
+        /// <param name="ficheroXls">Ruta del fichero a convertir</param>
+        /// <returns>Devuelve un "MemoryStream" con el contenido convertido</returns>
+        public static MemoryStream ConvertirAXlsx(string ficheroXls)
+        {
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook libro = excelApp.Workbooks.Open(ficheroXls);
+
+            // Crear un archivo temporal en formato .xlsx
+            string tempFilePath = Path.GetTempFileName() + ".xlsx";
+            libro.SaveAs(tempFilePath, Excel.XlFileFormat.xlOpenXMLWorkbook);
+
+            // Cerrar y liberar recursos
+            libro.Close(false);
+            excelApp.Quit();
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(libro);
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excelApp);
+
+            // Leer el archivo temporal en un MemoryStream
+            MemoryStream ms = new MemoryStream(File.ReadAllBytes(tempFilePath));
+
+            // Eliminar el archivo temporal
+            File.Delete(tempFilePath);
+
+            return ms;
+
         }
     }
 }

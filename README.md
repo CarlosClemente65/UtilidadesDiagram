@@ -4,9 +4,10 @@
 ### Desarrollado por Carlos Clemente (12-2024)
 
 ### Control de versiones
- - Version 1.0.0.0 - Primera version funcional.
- - Version 1.1.0.0 - Añadido metodo 'BorrarFicheros'
- - Version 1.2.0.0 - Modificada clase a estatica
+ - Version 1.0.0.0 	- Primera version funcional.
+ - Version 1.1.0.0 	- Añadido metodo 'BorrarFicheros'
+ - Version 1.2.0.0 	- Modificada clase a estatica
+ - Version 1.3.0.0	- Añadido metodo 'ConvertirAXlsx'
 
 <br>
 
@@ -17,4 +18,5 @@
  - DivideCadena(cadena, divisor). Divide la cadena por el caracter pasado en un maximo de 2 partes (por el primer caracter que encuentra; devuelve dos cadenas con el 'atributo' y 'valor'
  - ChequeoFramework(version). Controla si la version de .NET Framework instalada es superior a la pasada (versiones disponibles 4.7, 4.7.1, 4.7.2, 4.8 y 4.8.1)
  - BorrarFicheros(fichero). Borra todos los ficheros sin tener en cuenta la extension del fichero pasado (delete fichero.\*); devuelve la lista de ficheros borrados
+ - ConvertirAXlsx(fichero). Convierte el contenido de un fichero Excel 97-2003 (.xls) al formato Excel 2003 (.xlsx); devuelve un MemoryStream con el contenido del Excel ya convertido
 <br>
