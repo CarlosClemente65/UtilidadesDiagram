@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.Win32;
@@ -12,6 +13,13 @@ namespace UtilidadesDiagram
     /// </summary>
     public static class Utilidades
     {
+        // Extensiones Excel validas
+        private static readonly HashSet<string> extensionesValidas = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            ".xlsx",
+            ".xls"
+        };
+
         /// <summary>
         /// Metodo para quitar los acentos a las vocales y simbolos raros
         /// </summary>
@@ -199,6 +207,23 @@ namespace UtilidadesDiagram
             File.Delete(tempFilePath);
 
             return ms;
+
+        }
+
+
+        /// <summary>
+        /// Chequea si el fichero pasado es un Excel (extension xlsx o xls)
+        /// </summary>
+        /// <param name="fichero"></param>
+        /// <returns>true si el fichero es un Excel</returns>
+        public static bool EsFicheroExcel(string fichero)
+        {
+            if(string.IsNullOrEmpty(fichero))
+            {
+                return false;
+            }
+
+            return extensionesValidas.Contains(Path.GetExtension(fichero));
 
         }
     }
